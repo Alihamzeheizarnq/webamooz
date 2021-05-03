@@ -24,7 +24,7 @@ ul,
 ol,
 blockquote {
     line-height: 1.4;
-    text-align: left;
+    text-align: right;
 }
 
 a {
@@ -42,28 +42,28 @@ h1 {
     font-size: 18px;
     font-weight: bold;
     margin-top: 0;
-    text-align: left;
+    text-align: right;
 }
 
 h2 {
     font-size: 16px;
     font-weight: bold;
     margin-top: 0;
-    text-align: left;
+    text-align: right;
 }
 
 h3 {
     font-size: 14px;
     font-weight: bold;
     margin-top: 0;
-    text-align: left;
+    text-align: right;
 }
 
 p {
     font-size: 16px;
     line-height: 1.5em;
     margin-top: 0;
-    text-align: left;
+    text-align: right;
 }
 
 p.sub {
@@ -234,7 +234,7 @@ img {
 .button-primary {
     background-color: #2d3748;
     border-bottom: 8px solid #2d3748;
-    border-left: 18px solid #2d3748;
+    border-right: 18px solid #2d3748;
     border-right: 18px solid #2d3748;
     border-top: 8px solid #2d3748;
 }
@@ -243,7 +243,7 @@ img {
 .button-success {
     background-color: #48bb78;
     border-bottom: 8px solid #48bb78;
-    border-left: 18px solid #48bb78;
+    border-right: 18px solid #48bb78;
     border-right: 18px solid #48bb78;
     border-top: 8px solid #48bb78;
 }
@@ -252,7 +252,7 @@ img {
 .button-error {
     background-color: #e53e3e;
     border-bottom: 8px solid #e53e3e;
-    border-left: 18px solid #e53e3e;
+    border-right: 18px solid #e53e3e;
     border-right: 18px solid #e53e3e;
     border-top: 8px solid #e53e3e;
 }
@@ -260,7 +260,7 @@ img {
 /* Panels */
 
 .panel {
-    border-left: #2d3748 solid 4px;
+    border-right: #2d3748 solid 4px;
     margin: 21px 0;
 }
 
