@@ -1,4 +1,3 @@
-
 @extends('auth.layouts')
 
 @section('content')
@@ -7,7 +6,7 @@
     <form action="{{ route('verification.send') }}" class="form" method="post">
         @csrf
         <a class="account-logo" href="{{ asset('/') }}">
-            <img src="img/weblogo.png" alt="">
+            <img src="{{ asset('img/weblogo.png') }}" alt="">
         </a>
         @if ($errors->any())
             <div class="alert alert-danger">
