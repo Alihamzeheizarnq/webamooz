@@ -2,12 +2,12 @@
 
 @section('content')
 
-    <div class="account">
         <form action="{{ route('password.email') }}" class="form" method="post">
             @csrf
             <a class="account-logo" href="index.html">
                 <img src="img/weblogo.png" alt="">
             </a>
+            <x-auth-session-status class="mb-4" :status="session('status')"/>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
