@@ -28,10 +28,10 @@ class LoginRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'email' => 'required|string',
-            'password' => 'required|string',
-        ];
+            return [
+                'email' => 'required|string',
+                'password' => 'required|string',
+            ];
     }
 
     /**
@@ -46,10 +46,10 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         $auth = [
-            filter_var($this->email , FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile' =>  $this->email,
+            filter_var($this->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile' => $this->email,
             'password' => $this->password
         ];
-        if (! Auth::attempt($auth, $this->filled('remember'))) {
+        if (!Auth::attempt($auth, $this->filled('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -69,7 +69,7 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited()
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
@@ -92,6 +92,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey()
     {
-        return Str::lower($this->input('email')).'|'.$this->ip();
+        return Str::lower($this->input('email')) . '|' . $this->ip();
     }
 }
