@@ -1,4 +1,4 @@
-@extends('auth.layouts')
+@extends('User::auth.layouts')
 
 @section('content')
 

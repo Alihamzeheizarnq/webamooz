@@ -1,4 +1,4 @@
-@extends('auth.layouts' , ['class' => 'act'])
+@extends('User::auth.layouts' , ['class' => 'act'])
 
 @section('content')
 
