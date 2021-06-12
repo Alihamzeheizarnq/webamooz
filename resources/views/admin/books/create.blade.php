@@ -5,7 +5,7 @@
         <section class="content-header">
             <section class="content">
 
-                <div >
+                <div>
 
                     <div class="card card-warning">
                         <div class="">
@@ -22,11 +22,13 @@
 
                                 <div class="form-group">
                                     <label>نام کتاب</label>
-                                    <input type="text" class="form-control" name="name" placeholder="نام را وارد کنید..">
+                                    <input type="text" class="form-control" name="name"
+                                           placeholder="نام را وارد کنید..">
                                 </div>
                                 <div class="form-group">
                                     <label>قیمت کتاب</label>
-                                    <input type="text" class="form-control" name="price" placeholder="قیمت را وارد کنید..">
+                                    <input type="text" class="form-control" name="price"
+                                           placeholder="قیمت را وارد کنید..">
                                 </div>
                                 <div class="form-group">
                                     <label>عکس کتاب</label>
