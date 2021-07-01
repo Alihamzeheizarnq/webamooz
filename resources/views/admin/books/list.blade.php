@@ -8,7 +8,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">لیست تگ ها</h3>
+                                <h3 class="card-title">لیست کتاب ها</h3>
 
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
@@ -27,19 +27,31 @@
                                     <tbody>
                                     <tr>
                                         <th>نام</th>
+                                        <th>نام نویسنده</th>
+                                        <th>قیمت</th>
+                                        <th>عکس کتاب</th>
+                                        <th>فایل کتاب</th>
                                         <th>ویرایش</th>
                                         <th>حذف</th>
 
                                     </tr>
 
-                                    @foreach($tags as $tag)
+                                    @foreach($books as $book)
                                         <tr>
-                                            <td style="width: 70%">{{ $tag->tag }}</td>
-                                            <td><a href="{{ route('tags.edit' , $tag->id) }}"><span class="badge badge-success">ویرایش</span></a>
+                                            <td >{{ $book->book_name }}</td>
+                                            <td>{{ $book->author_name }}</td>
+                                            <td>{{ $book->price }}</td>
+                                            <td><img height="80" width="80" src="{{ asset('/storage/img/' . $book->img) }}" alt=""></td>
+                                            <td><a href="{{ asset('/storage/pdf/' . $book->book_file) }}" alt="">download</a></td>
+
+
+                                            @if($book->role != 'superAdmin')
+                                            <td><a href="{{ route('books.edit' , $book->id) }}"><span class="badge badge-success">ویرایش</span></a>
                                             </td>
-                                            <td><a href="" onclick="event.preventDefault(); document.querySelector('#delete-tags-{{$tag->id}}').submit()"><span class="badge badge-danger">حذف</span></a>
+                                            <td><a href="" onclick="event.preventDefault(); document.querySelector('#delete-book-{{$book->id}}').submit()"><span class="badge badge-danger">حذف</span></a>
                                             </td>
-                                            <form method="post" action="{{ route('users.destroy' , $tag->id) }}" id="delete-tags-{{$tag->id}}">
+                                            @endif
+                                            <form method="post" action="{{ route('books.destroy' , $book->id) }}" id="delete-book-{{$book->id}}">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

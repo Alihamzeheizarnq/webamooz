@@ -15,7 +15,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::all();
+        return view('admin.books.list', compact('books'));
     }
 
     /**
@@ -26,7 +27,7 @@ class BookController extends Controller
     public function create()
     {
         $tags = Tag::all();
-        return view('admin.books.create' , compact('tags'));
+        return view('admin.books.create', compact('tags'));
     }
 
     /**
@@ -78,7 +79,9 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $tags = Tag::all();
+        $bookTags = $book->tags;
+        return view('admin.books.edit', compact('book', 'tags', 'bookTags'));
     }
 
     /**
@@ -90,7 +93,28 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $request->validate([
+            'name' => ['required'],
+            'author' => ['required'],
+            'img' => ['nullable', 'mimes:jpeg,bmp,png'],
+            'bookfile' => ['nullable', 'mimes:pdf'],
+            'price' => ['required'],
+            'text' => ['required'],
+            'tag' => ['required'],
+            'tag.*' => ['string']
+        ]);
+        $file = $this->uploadedFile($request);
+        $book->update([
+            'book_name' => $request->name,
+            'author_name' => $request->author,
+            'img' => $file['img'] ?? $book->img,
+            'book_file' => $file['pdf'] ?? $book->book_file,
+            'price' => $request->price,
+            'text' => $request->text,
+        ]);
+        $book->tags()->sync($request->tag);
+        alert()->success('کتاب با موفقیت ویرایش شد');
+        return back();
     }
 
     /**
@@ -101,29 +125,34 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+
+        $book->delete();
+        alert()->warning('کتاب با موفقیت حذف گردید');
+        return back();
     }
 
     public function home()
     {
         $books = Book::all();
-        return view('index' , compact('books'));
+        return view('index', compact('books'));
     }
 
     private function uploadedFile(Request $request)
     {
-        $img = $request->file('img');
-        $pdf = $request->file('bookfile');
+        if ($img = $request->file('img')) {
+            $imgName = time() . $img->getClientOriginalName();
+            $img->storeAs('/img', $imgName, ['disk' => 'public']);
 
-        $imgName = time() . $img->getClientOriginalName();
-        $pdfName = time() . $pdf->getClientOriginalName();
+        }
+        if ($pdf = $request->file('bookfile')) {
+            $pdfName = time() . $pdf->getClientOriginalName();
+            $pdf->storeAs('/pdf', $pdfName, ['disk' => 'public']);
+        }
 
-        $img->storeAs('/img' , $imgName,['disk' => 'public']);
-        $pdf->storeAs('/pdf' , $pdfName , ['disk' => 'public']);
 
         return [
-            'pdf' => $pdfName,
-            'img' => $imgName
+            'pdf' => $pdfName ?? null,
+            'img' => $imgName ?? null
         ];
     }
 }
