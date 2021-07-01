@@ -14,9 +14,7 @@ Route::group(['middleware' => ['auth' , 'checkUser']] , function (Router $router
    $router->resource('buys' , BuysController::class);
    $router->resource('tags' , TagController::class);
 });
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [BookController::class , 'home']);
 require __DIR__ . '/auth.php';
 
 

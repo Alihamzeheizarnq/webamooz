@@ -16,9 +16,9 @@ class checkUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->isAdmin()){
+        if (auth()->user()->isAdmin() || auth()->user()->role == 'superAdmin'){
             return $next($request);
         }
-        return abort(404);
+        return redirect('/');
     }
 }

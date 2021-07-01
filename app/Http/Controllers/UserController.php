@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('admin.users.list' , compact('users'));
     }
 
     /**
@@ -54,9 +56,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        if ($user->role == 'superAdmin'){
+            return redirect()->route('users.index');
+        }
+        return view('admin.users.edit' , compact('user'));
     }
 
     /**
@@ -66,9 +71,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required'],
+            'lastname' => ['required'],
+            'email' => ['required'],
+            'role' => ['required'],
+        ]);
+        $user->update($request->all());
+        alert()->success('کاربر مورد نظر با موفقیت ویرایش گردید');
+        return redirect()->route('users.index');
     }
 
     /**

@@ -17,11 +17,10 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('book_name');
             $table->string('author_name');
-            $table->string('tag');
             $table->string('img');
-            $table->bigInteger('price');
-            $table->lineString('book_file');
-            $table->longText('text');
+            $table->string('price');
+            $table->string('book_file');
+            $table->text('text');
             $table->timestamps();
         });
     }

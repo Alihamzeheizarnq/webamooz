@@ -11,4 +11,10 @@ class Tag extends Model
 
 
     protected $fillable = ['tag'];
+
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class);
+    }
 }
